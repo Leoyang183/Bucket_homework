@@ -34,7 +34,7 @@ export function WalletInfo() {
           </div>
           <div className="space-y-2">
             <div className="text-sm font-medium text-muted-foreground">SUI 餘額</div>
-            <div className="text-2xl font-semibold text-muted-foreground">-</div>
+            <div className="font-mono text-sm text-muted-foreground">-</div>
           </div>
         </CardContent>
       </Card>
