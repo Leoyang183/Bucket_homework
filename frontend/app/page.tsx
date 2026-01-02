@@ -20,6 +20,7 @@ export default function Home() {
           priority
         />
         <div onClick={() => handleClick('/story1')} className="cursor-pointer">Story 1</div>
+        <div onClick={() => handleClick('/story2')} className="cursor-pointer">Story 2</div>
       </main>
     </div>
   );
