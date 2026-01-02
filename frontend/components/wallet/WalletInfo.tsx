@@ -42,9 +42,10 @@ export function WalletInfo() {
   }
 
   const formattedAddress = formatAddress(currentAccount.address);
-  const suiBalance = balance
-    ? (BigInt(balance.totalBalance) / 1_000_000_000n).toString()
-    : "0.0000";
+  const mist = BigInt(balance?.totalBalance || 0);
+  const suiInt = mist / 1_000_000_000n;
+  const suiDecimal = mist % 1_000_000_000n;
+  const suiBalance = `${suiInt}.${suiDecimal.toString().padStart(9, '0')}`
 
   return (
     <Card>
