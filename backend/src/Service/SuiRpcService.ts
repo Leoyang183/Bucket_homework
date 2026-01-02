@@ -12,6 +12,12 @@ export interface AddressAsset {
   tokens: TokenBalance[]
 }
 
+export interface AdminBalance {
+  admin: string
+  id: string
+  balance: string
+}
+
 export class SuiRpcService {
   private readonly client: SuiClient
 
@@ -73,5 +79,21 @@ export class SuiRpcService {
       suiBalance: this.FormatBalance(suiBalance.totalBalance),
       tokens,
     }
+  }
+
+  async GetAdminBalance(ObjectId: string): Promise<AdminBalance> {
+    const res = await this.client.getObject({
+      id: ObjectId,
+      options: { showContent: true },
+    });
+    const fields = (res?.data?.content as any).fields;
+    const admin = fields.admin as string;
+    const id = fields.id.id as string;
+    const balance = fields.balance as string;
+    return {
+      admin,
+      id,
+      balance: this.FormatBalance(balance),
+    };
   }
 }

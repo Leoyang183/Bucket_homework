@@ -3,6 +3,7 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import GetAddressAsset from '@UseCase/GetAddressAsset'
+import GetSuiTestnetAdminBalance from '@UseCase/GetSuiTestnetAdminBalance'
 
 const app = express()
 const port = 5487
@@ -29,7 +30,7 @@ app.get('/checkAddressAsset', async (req, res) => {
     }
 
     const useCase = new GetAddressAsset(address)
-    const asset = await useCase.Exec()
+    const asset = await useCase.exec()
 
     return res.json(asset)
   } catch (error) {
@@ -52,6 +53,17 @@ app.get('/checkAddressAsset', async (req, res) => {
   }
 })
 
+app.get('/getSuiTestnetAdminBalance', async (req, res) => {
+  try {
+    const asset = await new GetSuiTestnetAdminBalance().exec()
+    return res.json(asset)
+  } catch (error) {
+    return res.status(500).json({
+      error: 'Internal server error',
+      message: 'Unknown error occurred',
+    })
+  }
+})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
