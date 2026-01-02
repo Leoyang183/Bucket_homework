@@ -1,7 +1,7 @@
 import { SuiAddress } from '@Domain/ValueObject/SuiAddress'
 import { getFullnodeUrl } from '@mysten/sui/client'
 import { SuiRpcService, AddressAsset } from '@Service/SuiRpcService'
-const NETWORK = 'mainnet'
+const NETWORK = getFullnodeUrl('mainnet')
 export class GetAddressAsset {
   constructor(private readonly address: string) {}
 
