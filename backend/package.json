@@ -11,5 +11,9 @@
     "ts-node": "^10.9.2",
     "nodemon": "^3.1.11",
     "tsx": "^4.21.0"
+  },
+  "scripts": {
+    "start": "ts-node index.ts",
+    "dev": "nodemon --exec tsx index.ts"
   }
 }
