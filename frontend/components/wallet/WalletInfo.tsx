@@ -43,7 +43,7 @@ export function WalletInfo() {
 
   const formattedAddress = formatAddress(currentAccount.address);
   const suiBalance = balance
-    ? (Number(balance.totalBalance) / 1_000_000_000).toFixed(4)
+    ? (BigInt(balance.totalBalance) / 1_000_000_000n).toString()
     : "0.0000";
 
   return (
