@@ -22,6 +22,7 @@ export default function Home() {
         <div onClick={() => handleClick('/story1')} className="cursor-pointer">Story 1</div>
         <div onClick={() => handleClick('/story2')} className="cursor-pointer">Story 2</div>
         <div onClick={() => handleClick('/story3')} className="cursor-pointer">Story 3</div>
+        <div onClick={() => handleClick('/story4')} className="cursor-pointer">Story 4</div>
       </main>
     </div>
   );
