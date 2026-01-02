@@ -1,0 +1,36 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+
+
+### /backend
+
+- 使用 node.js version 24, Express, Typescript
+- 請先參考 /backend/package.json 已經使用到的套件跟套件版本，再提出修改建議
+- 每次修改都要檢查有沒有 Linter error，需要修正
+- 希望新的功能需求可以參考 DDD 的設計模式跟資料夾結構設計，需注意相關檔案的依賴關係與 import 規則
+- 舊的功能需求延伸新檔案需參考 DDD 的設計模式跟資料夾結構設計
+- 我的 execute 指令比較喜歡使用 exec 命名
+- 舊的功能重構需要參考 DDD 的設計模式跟資料夾結構設計，需注意相關檔案的依賴關係並修改正確
+- 修改功能需參考 constants 或者其他已經被抽離出來的邏輯，維護整體設計的一致性
+- Coding style 命名都大寫開頭然後以 Pascal Case（Upper Camel Case）命名規則
+- Import 檔案路參考使用 module-alias or tsconfig.json 的路徑規則，使用 alias 路徑，不要使用相對路徑
+- 使用 Docker 編譯的時候請記得輸出 log 讓自己看得到 Docker build log 發生什麼事
+
+### /frontend
+- 使用 node.js version 24
+- 使用 taiwind 設計 css, UI 設計以 shadcn 的 UI component 為主
+
+
+
+### 測試檔案
+
+- 寫完一個新功能需要包含 Unit Test 統一使用測試模組 讓我們統一使用 Chai + Mocha + Sinon
+- 使用 Mocha 和 Chai 進行測試
+- 使用 Sinon 進行模擬
+- 遵循 AAA 模式（Arrange、Act、Assert）
+- 每次測試後清理 stub 和 mock
+- 修正相關 UseCase 時同時要修正或新增 TestCase
