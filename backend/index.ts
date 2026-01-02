@@ -1,11 +1,16 @@
 import 'module-alias/register'
 import 'dotenv/config'
 import express from 'express'
+import cors from 'cors'
 import GetAddressAsset from '@UseCase/GetAddressAsset'
 
 const app = express()
 const port = 5487
 
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}))
 app.use(express.json())
 
 app.get('/', (req, res) => {
