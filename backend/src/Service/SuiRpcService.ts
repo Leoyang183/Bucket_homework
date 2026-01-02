@@ -21,6 +21,12 @@ export class SuiRpcService {
       url,
     })
   }
+  private FormatBalance(balance: string): string {
+    const mist = BigInt(balance);
+    const suiInt = mist / 1_000_000_000n;
+    const suiDecimal = mist % 1_000_000_000n;
+    return `${suiInt}.${suiDecimal.toString().padStart(9, '0')}`;
+  };
 
   async GetAddressAsset(address: SuiAddress): Promise<AddressAsset> {
     const addressValue = address.GetValue()
@@ -37,9 +43,6 @@ export class SuiRpcService {
         owner: addressValue,
         cursor: cursor || undefined,
       })
-
-      console.log(coinsPage)
-
       for (const coin of coinsPage.data) {
         const coinType = coin.coinType
         const balance = BigInt(coin.balance)
@@ -62,12 +65,12 @@ export class SuiRpcService {
     const tokens: TokenBalance[] = Array.from(tokenMap.entries())
       .map(([coinType, { balance }]) => ({
         coinType,
-        balance: balance.toString(),
+        balance: this.FormatBalance(balance.toString()),
       }))
 
     return {
       address: addressValue,
-      suiBalance: suiBalance.totalBalance,
+      suiBalance: this.FormatBalance(suiBalance.totalBalance),
       tokens,
     }
   }
