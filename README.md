@@ -72,7 +72,7 @@ docker-compose down
 
 | 變數名稱       | 說明                  | 預設值                  | 必填 |
 | -------------- | --------------------- | ----------------------- | ---- |
-| `FRONTEND_URL` | 前端網址（用於 CORS） | `http://localhost:3000` | 否   |
+| `FRONTEND_URL` | 前端網址（用於 CORS） | `http://localhost:9527` | 否   |
 
 ### Frontend 環境變數
 
@@ -192,11 +192,11 @@ http://localhost:5487
 
 ### 前端應用
 
-- **開發環境**: http://localhost:3000
-- **Story 1**: http://localhost:3000/story1
-- **Story 2**: http://localhost:3000/story2
-- **Story 3**: http://localhost:3000/story3
-- **Story 4**: http://localhost:3000/story4
+- **開發環境**: http://localhost:9527
+- **Story 1**: http://localhost:9527/story1
+- **Story 2**: http://localhost:9527/story2
+- **Story 3**: http://localhost:9527/story3
+- **Story 4**: http://localhost:9527/story4
 
 ### 後端 API
 
@@ -257,6 +257,6 @@ npm install
 npm run dev
 ```
 
-Frontend 將運行在 http://localhost:3000
+Frontend 將運行在 http://localhost:9527
 
-**注意**: 本地開發時，請確保 Backend 的 CORS 設定允許來自 `http://localhost:3000` 的請求。
+**注意**: 本地開發時，請確保 Backend 的 CORS 設定允許來自 `http://localhost:9527` 的請求。

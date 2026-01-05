@@ -1,8 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 interface AdminBalance {
   admin: string;
   id: string;
@@ -16,7 +22,7 @@ export default function Story3Page() {
 
   const fetchAdminBalance = async () => {
     try {
-      const response = await fetch("http://localhost:5487/getSuiTestnetAdminBalance");
+      const response = await fetch(`${API_URL}/getSuiTestnetAdminBalance`);
 
       if (!response.ok) {
         throw new Error("取得資料失敗");
@@ -49,7 +55,9 @@ export default function Story3Page() {
           {loading && !data && (
             <Card>
               <CardContent className="pt-6">
-                <div className="text-center text-muted-foreground">載入中...</div>
+                <div className="text-center text-muted-foreground">
+                  載入中...
+                </div>
               </CardContent>
             </Card>
           )}
@@ -70,7 +78,9 @@ export default function Story3Page() {
                   <CardDescription>管理員地址</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="font-mono text-sm break-all">{data.admin}</div>
+                  <div className="font-mono text-sm break-all">
+                    {data.admin}
+                  </div>
                 </CardContent>
               </Card>
 
@@ -102,4 +112,3 @@ export default function Story3Page() {
     </div>
   );
 }
-

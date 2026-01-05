@@ -1,69 +1,71 @@
-import 'module-alias/register'
-import 'dotenv/config'
-import express from 'express'
-import cors from 'cors'
-import GetAddressAsset from '@UseCase/GetAddressAsset'
-import GetSuiTestnetAdminBalance from '@UseCase/GetSuiTestnetAdminBalance'
+import "module-alias/register";
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import GetAddressAsset from "@UseCase/GetAddressAsset";
+import GetSuiTestnetAdminBalance from "@UseCase/GetSuiTestnetAdminBalance";
 
-const app = express()
-const port = 5487
+const app = express();
+const port = 5487;
 
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true,
-}))
-app.use(express.json())
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:9527",
+    credentials: true,
+  })
+);
+app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
-app.get('/checkAddressAsset', async (req, res) => {
+app.get("/checkAddressAsset", async (req, res) => {
   try {
-    const address = req.query?.address as string
+    const address = req.query?.address as string;
 
     if (!address) {
       return res.status(400).json({
-        error: 'Missing address',
-        message: 'Address parameter is required',
-      })
+        error: "Missing address",
+        message: "Address parameter is required",
+      });
     }
 
-    const useCase = new GetAddressAsset(address)
-    const asset = await useCase.exec()
+    const useCase = new GetAddressAsset(address);
+    const asset = await useCase.exec();
 
-    return res.json(asset)
+    return res.json(asset);
   } catch (error) {
     if (error instanceof Error) {
-      if (error.message === 'Invalid Sui address format') {
+      if (error.message === "Invalid Sui address format") {
         return res.status(400).json({
-          error: 'Invalid address format',
+          error: "Invalid address format",
           message: error.message,
-        })
+        });
       }
       return res.status(500).json({
-        error: 'Internal server error',
+        error: "Internal server error",
         message: error.message,
-      })
+      });
     }
     return res.status(500).json({
-      error: 'Internal server error',
-      message: 'Unknown error occurred',
-    })
+      error: "Internal server error",
+      message: "Unknown error occurred",
+    });
   }
-})
+});
 
-app.get('/getSuiTestnetAdminBalance', async (req, res) => {
+app.get("/getSuiTestnetAdminBalance", async (req, res) => {
   try {
-    const asset = await new GetSuiTestnetAdminBalance().exec()
-    return res.json(asset)
+    const asset = await new GetSuiTestnetAdminBalance().exec();
+    return res.json(asset);
   } catch (error) {
     return res.status(500).json({
-      error: 'Internal server error',
-      message: 'Unknown error occurred',
-    })
+      error: "Internal server error",
+      message: "Unknown error occurred",
+    });
   }
-})
+});
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});

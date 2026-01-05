@@ -1,9 +1,16 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 interface TokenBalance {
   coinType: string;
@@ -24,7 +31,7 @@ export default function Story2Page() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!address.trim()) {
       setError("請輸入錢包地址");
       return;
@@ -36,7 +43,9 @@ export default function Story2Page() {
 
     try {
       const response = await fetch(
-        `http://localhost:5487/checkAddressAsset?address=${encodeURIComponent(address.trim())}`
+        `${API_URL}/checkAddressAsset?address=${encodeURIComponent(
+          address.trim()
+        )}`
       );
 
       if (!response.ok) {
@@ -111,7 +120,9 @@ export default function Story2Page() {
                   <CardDescription>錢包地址</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="font-mono text-sm break-all">{asset.address}</div>
+                  <div className="font-mono text-sm break-all">
+                    {asset.address}
+                  </div>
                 </CardContent>
               </Card>
 
@@ -177,4 +188,3 @@ export default function Story2Page() {
     </div>
   );
 }
-

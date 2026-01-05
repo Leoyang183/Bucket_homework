@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   backend:
@@ -9,7 +9,7 @@ services:
     ports:
       - "5487:5487"
     environment:
-      - FRONTEND_URL=http://localhost:3000
+      - FRONTEND_URL=http://localhost:9527
     volumes:
       - ./backend/.env:/app/.env
     restart: unless-stopped
@@ -20,9 +20,9 @@ services:
       dockerfile: Dockerfile
     container_name: bucket-frontend
     ports:
-      - "3000:3000"
+      - "9527:9527"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5487
     depends_on:
       - backend
     restart: unless-stopped
-
-
